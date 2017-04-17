@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .imasrc{
+            width:200px;
+            height:200px;
+            border:2px solid red;
+        }
+    </style>
+    <script src="js/jquery-1.11.3.min.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            $('.btn').click(function(){
+                console.log(11)
+                $.get("./image.js",function(data){
+                    console.log(data)
+                    $.each(JSON.parse(data),function(index,el){
+                        //这里必须要加json.parse  JSON.parse() 方法解析一个JSON字符串，构造由字符串描述的JavaScript值或对象。可以提供可选的reviver函数以在返回之前对所得到的对象执行变换。
+                       $(".ullist").append(
+                               "<li>"+'<img class="imasrc"/>' +'<h3>'+ el.title +'</h3>'+"</li>"
+                       )
+                        $('.imasrc').attr("src",el.imgsrc)
+                    })
+                });
+              /*  $.get("./image.json",function(data){
+                    console.log(data)
+                    $.each(data,function(index,el){
+                        console.log(el)
+                            $(".ullist").append(
+
+                                    "<li>"+'<img class="imasrc"/>' +'<h3>'+ el.title +'</h3>'+"</li>"
+                            );
+                            $('.imasrc').attr("src",el.imgsrc)
+                        })
+                });*/
+
+            })
+
+        })
+
+    </script>
+
+</head>
+<body>
+<button class="btn">获取数据</button>
+<ul class="ullist">
+
+</ul>
+
+</body>
+</html>
